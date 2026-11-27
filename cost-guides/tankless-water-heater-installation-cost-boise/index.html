@@ -8,11 +8,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=365aa68d">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tankless Water Heater Cost Boise | Boise Plumbing Co.</title>
-  <meta name="description" content="A whole-home gas tankless water heater installed in Boise runs about $2,000 to $6,000 in 2026. Gas line size, venting and hard water decide the price.">
+  <meta name="description" content="A whole-home gas tankless water heater installed in Boise typically runs $2,000 to $6,000 in 2026. Gas line size, venting and hard water decide the price.">
   <link rel="canonical" href="https://plumbing-boise-001.pages.dev/cost-guides/tankless-water-heater-installation-cost-boise/">
   <!-- Open Graph -->
   <meta property="og:title" content="Tankless Water Heater Cost Boise | Boise Plumbing Co.">
-  <meta property="og:description" content="A whole-home gas tankless water heater installed in Boise runs about $2,000 to $6,000 in 2026. Gas line size, venting and hard water decide the price.">
+  <meta property="og:description" content="A whole-home gas tankless water heater installed in Boise typically runs $2,000 to $6,000 in 2026. Gas line size, venting and hard water decide the price.">
   <meta property="og:url" content="https://plumbing-boise-001.pages.dev/cost-guides/tankless-water-heater-installation-cost-boise/">
   <meta property="og:image" content="https://plumbing-boise-001.pages.dev/images/hero_bg.webp">
   <meta property="og:type" content="article">
@@ -23,7 +23,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "How Much Does Tankless Water Heater Installation Cost in Boise?",
-      "description": "A whole-home gas tankless water heater installed in Boise runs about $2,000 to $6,000 in 2026. Gas line size, venting and hard water decide the price.",
+      "description": "A whole-home gas tankless water heater installed in Boise typically runs $2,000 to $6,000 in 2026. Gas line size, venting and hard water decide the price.",
       "datePublished": "2026-11-27",
       "dateModified": "2026-11-27",
       "mainEntityOfPage": "https://plumbing-boise-001.pages.dev/cost-guides/tankless-water-heater-installation-cost-boise/",
@@ -56,7 +56,7 @@
     },
     {
       "@type": "Question",
-      "name": "How big a tankless water heater does a 2,000 square foot house need?",
+      "name": "How big a tankless water heater does my house need?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Size by simultaneous fixtures, not square footage. Gas tankless units deliver roughly 2 to 5 gallons per minute. A home that runs two showers at once in winter usually needs a unit at the top of that range or a second unit."
@@ -4923,6 +4923,47 @@ body.look-plain .cg-more-list li { border-bottom: 1px solid var(--border); }
 body.look-plain .cg-more-list a { display: block; padding: 14px 0; font-size: 17px; font-weight: 600; color: var(--color-primary); }
 body.look-plain .cg-more-list a:hover { text-decoration: underline; }
 /* review-round-nov-2026:end */
+/* legibility-nov-2026:start */
+/* Legibility fixes 2026-11-27, from what tools/legibility_check.py measured on the first plain sites. One marked chunk
+   so older tests can compare "today minus these fixes" (tests/legibility_round.py); every rule is scoped to the plain look.
+   Numbers band: where the brand accent is under 3:1 on the brand colour the assembler adds stats-figure-plain and the
+   figures are white (Naples coral on green measured 2.3:1). A readable accent keeps its colour. */
+body.look-plain.stats-brand-band.stats-figure-plain #stats-bar .stat-value { color: #fff; }
+/* Call-to-action band: the paragraph sits inside .cta-band-inner, so the rule above for "#cta-band > .container > p"
+   never reached it and it stayed at the classic 75% white (4.1 to 4.4:1 over the tinted photo). This is the intended 92%. */
+body.look-plain #cta-band .cta-band-sub { color: rgba(255,255,255,0.92); }
+/* Blog post top section: the breadcrumb and the date line are full white, and a dark scrim sits behind the text block
+   (it fades in over the block's top padding), so a pale photo cannot wash them out: 30% black keeps white text at 4.5:1 or better even where the photo is pure
+   white over these brand colours. The photo keeps its 45%. */
+body.look-plain .post-hero-overlay { background-image: linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(0,0,0,0.3) 40px, rgba(0,0,0,0.3) 100%); }
+body.look-plain .post-breadcrumb, body.look-plain .post-breadcrumb a, body.look-plain .post-meta { color: #fff; }
+/* Photo service cards (photo_overlay): the dark fade hangs from the card title, so however long the card's text is the
+   title and the text sit on it. It replaces the fade that was fixed at 20% to 72% of the card's height (a long text
+   pushed the title up into its light part: 2.7:1 on a pale photo). The icon tile stays above it. */
+body.look-plain #services.services-variant-photo-overlay .svc-photo::after { background: rgba(10,22,30,0.05); }
+body.look-plain #services.services-variant-photo-overlay .service-card h3::before { content: ""; position: absolute; z-index: -1; left: -22px; right: -22px; top: -110px; height: 1200px; pointer-events: none; background: linear-gradient(180deg, rgba(10,22,30,0) 0, rgba(10,22,30,0.5) 110px, rgba(10,22,30,0.88) 180px); }
+body.look-plain #services.services-variant-photo-overlay .service-icon { z-index: 2; }
+/* Heading faces that are hard to read small (config/font_traits.json: small-bodied like Cormorant Garamond, whose 17px
+   reads like 12.8px, or condensed like Bebas Neue): the assembler adds heading-face-small and the headings of 18px and
+   under, the contents and sidebar titles, the footer brand name and the logo kicker are set in the body font, bold.
+   Larger headings keep the heading face. */
+body.look-plain.heading-face-small #services:not(.services-variant-photo-overlay) .service-card h3, body.look-plain.heading-face-small .area-service-card h3, body.look-plain.heading-face-small .vp-text h3, body.look-plain.heading-face-small .vp-text h4, body.look-plain.heading-face-small .vp-card h3, body.look-plain.heading-face-small .process-step h3, body.look-plain.heading-face-small .application-item h3, body.look-plain.heading-face-small .related-card h3, body.look-plain.heading-face-small .cg-faq-item h3, body.look-plain.heading-face-small .blog-card-title, body.look-plain.heading-face-small .contact-info-header h2, body.look-plain.heading-face-small .sidebar-card h3, body.look-plain.heading-face-small .cg-toc-title, body.look-plain.heading-face-small #site-footer .footer-brand-link, body.look-plain.heading-face-small #site-nav .nav-logo .nav-logo-kicker { font-family: var(--font-body); font-weight: 700; }
+/* Footer disclaimer: 14px on both footers (it was 13.5px, and 13px on the light footer: one paragraph on every page,
+   which alone put 7 to 9% of a referral site's characters under 14px). */
+body.look-plain .footer-disclaimer, body.look-plain #site-footer.footer-variant-light-minimal .footer-disclaimer { font-size: 14px; }
+/* Blog pages toggle `is-open` (templates/blog-*.html); open the menu and the dropdown on it too. */
+body.look-plain .nav-mobile-menu.is-open { display: flex; }
+body.look-plain .nav-dropdown.is-open .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); visibility: visible; }
+/* legibility-nov-2026:end */
+/* template-round-nov-2026:start */
+/* ── Template round 2026-11-27 (tests/test_plain_template_round.py; the start and end markers let older tests set this
+   chunk aside: tests/template_round.py) ── */
+/* The open phone menu sits inside the fixed top bar, so a menu taller than the screen was cut off with no way to reach
+   its last links and button (Naples, Bakersfield on a 390x667 phone). It now scrolls inside what is left of the screen
+   under the bar (and the strip, where a site shows one), on every top bar and on the blog pages, whose script opens it
+   with `is-open`. The dynamic viewport height keeps the last button above a phone browser's toolbar. */
+body.look-plain #site-nav .nav-mobile-menu.open, body.look-plain #site-nav .nav-mobile-menu.is-open { max-height: calc(100vh - var(--plain-bar-h) - var(--plain-strip-h)); max-height: calc(100dvh - var(--plain-bar-h) - var(--plain-strip-h)); overflow-y: auto; overscroll-behavior: contain; }
+/* template-round-nov-2026:end */
 /* === hero-photo-form === */
 /* Top section: photo_form (the full-width photo with the plain look's left-heavy darkening; headline, text and phone on the left, a white
    quote-form card on the right over the photo; on phones the text comes first, then the card).
@@ -5162,7 +5203,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       </ul>
       <div class="nav-actions">
         <a href="tel:+12085550100" class="nav-phone" aria-label="Call us"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a>
-        <a href="/contact/" class="btn btn-primary">Get a Price</a>
+        <a href="/contact/" class="btn btn-primary">Request a Quote</a>
       </div>
       <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
     </nav>
@@ -5179,7 +5220,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/" onclick="closeMenu()">Price Guide</a>
     <a href="/contact/" onclick="closeMenu()">Contact</a>
     <a href="tel:+12085550100" onclick="closeMenu()" style="display:flex;align-items:center;gap:8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a>
-    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Get a Price</a>
+    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Request a Quote</a>
   </nav>
 </header>
 
@@ -5197,7 +5238,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <div class="container">
       <span class="cg-tldr-eyebrow">Quick Answer</span>
       <div class="cg-tldr-grid">
-        <div class="cg-tldr-stat"><div class="cg-tldr-label">Whole-home gas tankless, installed (2026)</div><div class="cg-tldr-value">$2,000 to $6,000</div></div><div class="cg-tldr-stat"><div class="cg-tldr-label">Simple swap, existing gas and vent fit</div><div class="cg-tldr-value">$2,000 to $3,000</div></div><div class="cg-tldr-stat"><div class="cg-tldr-label">Standard tank, for comparison</div><div class="cg-tldr-value">$800 to $2,500</div></div><div class="cg-tldr-stat"><div class="cg-tldr-label">Typical conversion</div><div class="cg-tldr-value">One working day</div></div>
+        <div class="cg-tldr-stat"><div class="cg-tldr-label">Whole-home gas tankless, installed (2026)</div><div class="cg-tldr-value">$2,000 to $6,000</div></div><div class="cg-tldr-stat"><div class="cg-tldr-label">Simple swap, existing gas and vent fit</div><div class="cg-tldr-value">$2,000 to $3,000</div></div><div class="cg-tldr-stat"><div class="cg-tldr-label">Standard tank, for comparison</div><div class="cg-tldr-value">$800 to $2,500</div></div><div class="cg-tldr-stat"><div class="cg-tldr-label">Softener or scale filter added</div><div class="cg-tldr-value">$1,000 to $3,000</div></div>
       </div>
     </div>
   </section>
@@ -5219,7 +5260,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
   <section class="cg-intro">
     <div class="container">
       <p>Tankless is a water heater question with no single answer in Boise. Whether it pays back depends on your house and how your household uses hot water.</p>
-<p>This guide covers what 2026 published pricing says about tankless installation in Boise and the Treasure Valley, why a straight swap and a full retrofit can be thousands apart, and what hard water means for a tankless heat exchanger. The figures are market ranges, not quotes. The form below books a visit where a plumber checks your gas supply, venting path and water, and writes the price down before anything is ordered.</p>
+<p>This guide covers what 2026 published pricing says about tankless installation in Boise and the Treasure Valley, why a straight swap and a full retrofit can be thousands apart, and what hard water means for a tankless heat exchanger. The figures are market ranges, not quotes. The form below books a visit where a plumber checks your gas supply, venting path and water.</p>
     </div>
   </section>
 
@@ -5230,7 +5271,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
         <div class="cg-range-figure">
           $2,000&nbsp;–&nbsp;$6,000<span class="cg-range-figure-unit">per installed unit</span>
         </div>
-        <p class="cg-range-basis">Boise and Treasure Valley market typical, 2026, whole-home gas tankless, mid-range unit; local guides disagree widely on tankless, so the breakdown table carries more weight than the headline range</p>
+        <p class="cg-range-basis">Boise and Treasure Valley market typical, 2026, whole-home gas tankless, mid-range unit</p>
       </div>
     </div>
   </section>
@@ -5271,7 +5312,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       <div class="cg-section" id="why-tankless-installation-costs-more-in-boise"><h2>Why Tankless Installation Costs More in Boise</h2><p>Local guides do not agree on tankless. One 2026 Boise price guide lists $2,000 to $4,500 installed. A Treasure Valley trades directory lists $1,500 to $2,500. A Boise HVAC and plumbing company publishes $3,000 and up, and a Boise plumber on a local forum put full conversions at $3,000 to $8,000.</p>
 <p>The spread exists because a tankless install is really three jobs: the water connection, the gas line that often has to be upsized, and venting that almost always has to be new. Whole-home gas tankless heaters are a separate ENERGY STAR category (<a href="https://www.energystar.gov/products/water_heaters">source</a>), and labeled units cost more than entry-level models. A quote that does not break out gas, vent and unit cannot be compared.</p></div><div class="cg-section" id="sizing-a-tankless-for-a-treasure-valley-home"><h2>Sizing a Tankless for a Treasure Valley Home</h2><p>The U.S. Department of Energy's building science reference notes that gas tankless heaters typically deliver about 2 to 5 gallons per minute (<a href="https://bsesc.energy.gov/energy-basics/water-heaters-gas-fired-tankless">source</a>). Sizing is about how many fixtures run at once, not square footage.</p>
 <p>Boise adds a seasonal wrinkle. Incoming water is colder in winter than in July, and a tankless unit has to lift that colder water the full distance to shower temperature, which cuts usable flow. Ask what incoming temperature the sizing assumes.</p></div><div class="cg-section" id="hard-water-and-tankless-heat-exchangers"><h2>Hard Water and Tankless Heat Exchangers</h2><p>By the U.S. Geological Survey's scale, water above 121 milligrams per liter of calcium carbonate is hard and above 180 is very hard (<a href="https://www.usgs.gov/special-topics/water-science-school/science/hardness-water">source</a>), and Treasure Valley water is widely described as sitting in that territory. In a tankless unit, scale coats the narrow passages of the heat exchanger, the expensive part.</p>
-<p>Several local installers describe descaling as an annual job in this water. Isolation valves make the service simple, and a <a href="/services/water-softeners-and-filtration/">softener or scale filter ahead of the unit</a> slows the buildup.</p></div><div class="cg-section" id="is-tankless-worth-it-in-boise"><h2>Is Tankless Worth It in Boise?</h2><p>For a larger household on natural gas that plans to stay put, often yes: no standby loss and hot water that does not run out. For a two-person household, the payback is slow. Our <a href="/services/water-heater-repair-and-replacement/">water heater team</a> writes a tank price and a tankless price on the same visit so the comparison is on paper.</p></div>
+<p>Several local installers describe descaling as an annual job in this water. Isolation valves make the service simple, and a <a href="/services/water-softeners-and-filtration/">softener or scale filter ahead of the unit</a> slows the buildup.</p></div><div class="cg-section" id="is-tankless-worth-it-in-boise"><h2>Is Tankless Worth It in Boise?</h2><p>For a larger household on natural gas that plans to stay put, often yes: no standby loss and hot water that does not run out. For a two-person household, the payback is slow. Our <a href="/services/water-heater-repair-and-replacement/">water heater service</a> covers both, and one visit gets you a tank price and a tankless price so the comparison is on paper.</p></div>
     </div>
   </section>
 
@@ -5279,7 +5320,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <div class="container">
       <span class="section-eyebrow">Honest Answers</span>
       <h2>Common Concerns</h2>
-      <div class="concern-item"><div class="concern-question">What is the downside of a tankless water heater?</div><p class="concern-response">Three real ones. The install cost is higher, sometimes much higher if gas and venting change. Flow is capped, so two showers and a washer at once can outrun a single unit. And in Treasure Valley hard water, the heat exchanger needs annual descaling or it fails early.</p></div>
+      <div class="concern-item"><div class="concern-question">What is the downside of a tankless water heater?</div><p class="concern-response">The install cost is higher, sometimes much higher if gas and venting change. Flow is capped, so two showers and a washer at once can outrun a single unit. And in Treasure Valley hard water, the heat exchanger needs annual descaling or it fails early.</p></div>
     </div>
   </section>
 
@@ -5288,7 +5329,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       <span class="section-eyebrow">Frequently Asked</span>
       <h2 class="section-heading">Cost Guide FAQ</h2>
       <div class="cg-faq-list">
-        <div class="cg-faq-item"><h3>How much should a plumber charge to install a tankless water heater in Boise?</h3><p>Published Boise figures for 2026 run from about $2,000 for a straightforward swap to $6,000 or more for a full conversion with new venting and a larger gas line. Ask for gas, vent and unit priced as separate lines.</p></div><div class="cg-faq-item"><h3>How big a tankless water heater does a 2,000 square foot house need?</h3><p>Size by simultaneous fixtures, not square footage. Gas tankless units deliver roughly 2 to 5 gallons per minute. A home that runs two showers at once in winter usually needs a unit at the top of that range or a second unit.</p></div><div class="cg-faq-item"><h3>Why is it so expensive to install a tankless water heater?</h3><p>Because the gas line, the venting and the electrical often have to change, and each is its own job. A swap where all three already fit is the only case near the low end.</p></div><div class="cg-faq-item"><h3>Is it worth replacing a tank water heater with a tankless one?</h3><p>It depends on household size, fuel and how long you will stay. Bigger gas households that want endless hot water tend to be happy; small households usually find the payback slow.</p></div><div class="cg-faq-item"><h3>How often does a tankless water heater need descaling in the Treasure Valley?</h3><p>Several local installers call it an annual job in this water. With isolation valves fitted at install, descaling is a routine service visit rather than a repair.</p></div><div class="cg-faq-item"><h3>Can a tankless water heater run two showers at once?</h3><p>A properly sized one can. At roughly 2 to 5 gallons per minute per unit, two showers need a unit at the upper end, and colder winter inlet water reduces usable flow.</p></div>
+        <div class="cg-faq-item"><h3>How much should a plumber charge to install a tankless water heater in Boise?</h3><p>Published Boise figures for 2026 run from about $2,000 for a straightforward swap to $6,000 or more for a full conversion with new venting and a larger gas line. Ask for gas, vent and unit priced as separate lines.</p></div><div class="cg-faq-item"><h3>How big a tankless water heater does my house need?</h3><p>Size by simultaneous fixtures, not square footage. Gas tankless units deliver roughly 2 to 5 gallons per minute. A home that runs two showers at once in winter usually needs a unit at the top of that range or a second unit.</p></div><div class="cg-faq-item"><h3>Why is it so expensive to install a tankless water heater?</h3><p>Because the gas line, the venting and the electrical often have to change, and each is its own job. A swap where all three already fit is the only case near the low end.</p></div><div class="cg-faq-item"><h3>Is it worth replacing a tank water heater with a tankless one?</h3><p>It depends on household size, fuel and how long you will stay. Bigger gas households that want endless hot water tend to be happy; small households usually find the payback slow.</p></div><div class="cg-faq-item"><h3>How often does a tankless water heater need descaling in the Treasure Valley?</h3><p>Several local installers call it an annual job in this water. With isolation valves fitted at install, descaling is a routine service visit rather than a repair.</p></div><div class="cg-faq-item"><h3>Can a tankless water heater run two showers at once?</h3><p>A properly sized one can. At roughly 2 to 5 gallons per minute per unit, two showers need a unit at the upper end, and colder winter inlet water reduces usable flow.</p></div>
       </div>
     </div>
   </section>
@@ -5305,7 +5346,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <div class="container">
       <div class="quote-form-card form-variant-inline-panel">
         <h2 id="quote-form-heading">Get a Written Quote for Your Project</h2>
-        <p class="quote-form-sub">Tell us about your project and you&rsquo;ll hear back within one business day.</p>
+        <p class="quote-form-sub">Tell us what's leaking, clogged or broken, and where in the house.</p>
         <form class="quote-form" action="https://leads-proxy.jeongpark95.workers.dev" method="POST" name="quote-lead" data-leads-form>
           <input type="hidden" name="run_id" value="plumbing-boise-001">
           <div class="hp-field" aria-hidden="true"><input type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
@@ -5317,7 +5358,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
           </div>
           <div class="quote-form-row">
             <input type="email" name="email" placeholder="Email (optional)" autocomplete="email" aria-label="Email address">
-            <input type="text" name="message" placeholder="What do you need done?" aria-label="Project details">
+            <input type="text" name="message" placeholder="What is leaking, clogged or broken, and where?" aria-label="Project details">
           </div>
           <div class="cf-turnstile" data-sitekey="0x4AAAAAAGEhzYf9wGkV4IbN" data-size="flexible" data-theme="light"></div>
           <input type="hidden" name="cf-sitekey" value="0x4AAAAAAGEhzYf9wGkV4IbN">
@@ -5327,7 +5368,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
         <div class="form-thank-you" aria-live="polite">
           <div class="form-thank-you-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h3>We&rsquo;ve got your request!</h3>
-          <p>You&rsquo;ll hear back within one business day. Need to talk sooner? Call <a href="tel:+12085550100">+1 (208) 555-0100</a>.</p>
+          <p>Thanks, your message is in. For an emergency, call the line. Need to talk sooner? Call <a href="tel:+12085550100">+1 (208) 555-0100</a>.</p>
         </div>
       </div>
     </div>
@@ -5336,9 +5377,9 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
   <section class="cg-cta-band" style="--cta-photo:url('/images/cta_bg.webp')">
     <div class="container">
       <h2>Thinking About Tankless? Get Both Prices on Paper.</h2>
-      <p>Book a visit. A Boise Plumbing Co. plumber checks your gas line, venting path and water, then writes a tank price and a tankless price before anything is ordered. No obligation. Serving Boise, Meridian, Nampa, Eagle, Caldwell and Kuna.</p>
+      <p>Book a visit. A Boise Plumbing Co. plumber checks your gas line, venting path and water, then writes a tank price and a tankless price before anything is ordered. No obligation. Serving Boise, Meridian, Eagle, Nampa, Caldwell and Kuna.</p>
       <div class="cg-cta-actions">
-        <a href="/contact/" class="btn-on-accent">Get an Estimate</a>
+        <a href="/contact/" class="btn-on-accent">Request a Quote</a>
         <a href="tel:+12085550100" class="btn-ghost-dark">Call +1 (208) 555-0100</a>
       </div>
       <p class="referral-line">We'll put you in touch with a local contractor.</p>
@@ -5357,14 +5398,14 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <li><a href="/services/leak-repair-and-repiping/">Leak Repair and Repiping</a></li>
             <li><a href="/services/water-softeners-and-filtration/">Water Softeners and Filtration</a></li>
 </ul></div>
-      <div class="footer-col"><h4>Inquiry</h4><ul><li><a href="/contact/">Request Quote</a></li><li><a href="/about/">About Us</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div>
+      <div class="footer-col"><h4>Inquiry</h4><ul><li><a href="/contact/">Request a Quote</a></li><li><a href="/about/">About Us</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div>
       <div class="footer-col"><h4>Serving the Treasure Valley</h4><ul><li><a href="/">Boise</a></li><li><a href="/areas/meridian/">Meridian</a></li><li><a href="/areas/nampa/">Nampa</a></li><li><a href="/areas/eagle/">Eagle</a></li><li><a href="/areas/caldwell/">Caldwell</a></li><li><a href="/areas/kuna/">Kuna</a></li></ul></div>
     </div></div></div>
     <div class="container"><p class="footer-disclaimer">This site is a free service to assist homeowners in connecting with local service contractors. All contractors are independent and this site does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. All persons depicted in a photo or video are actors or models and not contractors listed on this site.</p></div>
     <div class="container"><div class="footer-bottom"><span>&copy; 2026 Boise Plumbing Co. All rights reserved.</span><span>Boise, Idaho, United States</span></div></div>
   </footer>
 
-  <a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now &mdash; +1 (208) 555-0100</a>
+  <a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now: +1 (208) 555-0100</a>
 
   <script>
     function toggleMenu(btn){var m=document.getElementById('mobile-nav');m.classList.toggle('open');btn.setAttribute('aria-expanded',String(m.classList.contains('open')));}

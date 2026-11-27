@@ -10,11 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- area_page_meta_title is set per-area by stage4 -->
   <title>Plumber Nampa Idaho | Boise Plumbing Co. · +1 (208) 555-0100</title>
-  <meta name="description" content="Plumber in Nampa, Idaho for sewer lines, drains, water heaters and leaks, old core or new subdivision. Price in writing first. Book a Nampa visit today.">
+  <meta name="description" content="Plumber in Nampa, Idaho for sewer lines, drains, water heaters and leaks, in the old downtown core or a new subdivision. Book a Nampa visit today.">
   <link rel="canonical" href="https://plumbing-boise-001.pages.dev/areas/nampa/">
   <!-- Open Graph -->
   <meta property="og:title" content="Plumber Nampa Idaho | Boise Plumbing Co. · +1 (208) 555-0100">
-  <meta property="og:description" content="Plumber in Nampa, Idaho for sewer lines, drains, water heaters and leaks, old core or new subdivision. Price in writing first. Book a Nampa visit today.">
+  <meta property="og:description" content="Plumber in Nampa, Idaho for sewer lines, drains, water heaters and leaks, in the old downtown core or a new subdivision. Book a Nampa visit today.">
   <meta property="og:url" content="https://plumbing-boise-001.pages.dev/areas/nampa/">
   <meta property="og:image" content="https://plumbing-boise-001.pages.dev/images/hero_bg.webp">
   <meta property="og:type" content="website">
@@ -4879,6 +4879,47 @@ body.look-plain .cg-more-list li { border-bottom: 1px solid var(--border); }
 body.look-plain .cg-more-list a { display: block; padding: 14px 0; font-size: 17px; font-weight: 600; color: var(--color-primary); }
 body.look-plain .cg-more-list a:hover { text-decoration: underline; }
 /* review-round-nov-2026:end */
+/* legibility-nov-2026:start */
+/* Legibility fixes 2026-11-27, from what tools/legibility_check.py measured on the first plain sites. One marked chunk
+   so older tests can compare "today minus these fixes" (tests/legibility_round.py); every rule is scoped to the plain look.
+   Numbers band: where the brand accent is under 3:1 on the brand colour the assembler adds stats-figure-plain and the
+   figures are white (Naples coral on green measured 2.3:1). A readable accent keeps its colour. */
+body.look-plain.stats-brand-band.stats-figure-plain #stats-bar .stat-value { color: #fff; }
+/* Call-to-action band: the paragraph sits inside .cta-band-inner, so the rule above for "#cta-band > .container > p"
+   never reached it and it stayed at the classic 75% white (4.1 to 4.4:1 over the tinted photo). This is the intended 92%. */
+body.look-plain #cta-band .cta-band-sub { color: rgba(255,255,255,0.92); }
+/* Blog post top section: the breadcrumb and the date line are full white, and a dark scrim sits behind the text block
+   (it fades in over the block's top padding), so a pale photo cannot wash them out: 30% black keeps white text at 4.5:1 or better even where the photo is pure
+   white over these brand colours. The photo keeps its 45%. */
+body.look-plain .post-hero-overlay { background-image: linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(0,0,0,0.3) 40px, rgba(0,0,0,0.3) 100%); }
+body.look-plain .post-breadcrumb, body.look-plain .post-breadcrumb a, body.look-plain .post-meta { color: #fff; }
+/* Photo service cards (photo_overlay): the dark fade hangs from the card title, so however long the card's text is the
+   title and the text sit on it. It replaces the fade that was fixed at 20% to 72% of the card's height (a long text
+   pushed the title up into its light part: 2.7:1 on a pale photo). The icon tile stays above it. */
+body.look-plain #services.services-variant-photo-overlay .svc-photo::after { background: rgba(10,22,30,0.05); }
+body.look-plain #services.services-variant-photo-overlay .service-card h3::before { content: ""; position: absolute; z-index: -1; left: -22px; right: -22px; top: -110px; height: 1200px; pointer-events: none; background: linear-gradient(180deg, rgba(10,22,30,0) 0, rgba(10,22,30,0.5) 110px, rgba(10,22,30,0.88) 180px); }
+body.look-plain #services.services-variant-photo-overlay .service-icon { z-index: 2; }
+/* Heading faces that are hard to read small (config/font_traits.json: small-bodied like Cormorant Garamond, whose 17px
+   reads like 12.8px, or condensed like Bebas Neue): the assembler adds heading-face-small and the headings of 18px and
+   under, the contents and sidebar titles, the footer brand name and the logo kicker are set in the body font, bold.
+   Larger headings keep the heading face. */
+body.look-plain.heading-face-small #services:not(.services-variant-photo-overlay) .service-card h3, body.look-plain.heading-face-small .area-service-card h3, body.look-plain.heading-face-small .vp-text h3, body.look-plain.heading-face-small .vp-text h4, body.look-plain.heading-face-small .vp-card h3, body.look-plain.heading-face-small .process-step h3, body.look-plain.heading-face-small .application-item h3, body.look-plain.heading-face-small .related-card h3, body.look-plain.heading-face-small .cg-faq-item h3, body.look-plain.heading-face-small .blog-card-title, body.look-plain.heading-face-small .contact-info-header h2, body.look-plain.heading-face-small .sidebar-card h3, body.look-plain.heading-face-small .cg-toc-title, body.look-plain.heading-face-small #site-footer .footer-brand-link, body.look-plain.heading-face-small #site-nav .nav-logo .nav-logo-kicker { font-family: var(--font-body); font-weight: 700; }
+/* Footer disclaimer: 14px on both footers (it was 13.5px, and 13px on the light footer: one paragraph on every page,
+   which alone put 7 to 9% of a referral site's characters under 14px). */
+body.look-plain .footer-disclaimer, body.look-plain #site-footer.footer-variant-light-minimal .footer-disclaimer { font-size: 14px; }
+/* Blog pages toggle `is-open` (templates/blog-*.html); open the menu and the dropdown on it too. */
+body.look-plain .nav-mobile-menu.is-open { display: flex; }
+body.look-plain .nav-dropdown.is-open .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); visibility: visible; }
+/* legibility-nov-2026:end */
+/* template-round-nov-2026:start */
+/* ── Template round 2026-11-27 (tests/test_plain_template_round.py; the start and end markers let older tests set this
+   chunk aside: tests/template_round.py) ── */
+/* The open phone menu sits inside the fixed top bar, so a menu taller than the screen was cut off with no way to reach
+   its last links and button (Naples, Bakersfield on a 390x667 phone). It now scrolls inside what is left of the screen
+   under the bar (and the strip, where a site shows one), on every top bar and on the blog pages, whose script opens it
+   with `is-open`. The dynamic viewport height keeps the last button above a phone browser's toolbar. */
+body.look-plain #site-nav .nav-mobile-menu.open, body.look-plain #site-nav .nav-mobile-menu.is-open { max-height: calc(100vh - var(--plain-bar-h) - var(--plain-strip-h)); max-height: calc(100dvh - var(--plain-bar-h) - var(--plain-strip-h)); overflow-y: auto; overscroll-behavior: contain; }
+/* template-round-nov-2026:end */
 /* === hero-photo-form === */
 /* Top section: photo_form (the full-width photo with the plain look's left-heavy darkening; headline, text and phone on the left, a white
    quote-form card on the right over the photo; on phones the text comes first, then the card).
@@ -5077,7 +5118,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       </ul>
       <div class="nav-actions">
         <a href="tel:+12085550100" class="nav-phone" aria-label="Call us"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a>
-        <a href="/contact/" class="btn btn-primary">Get a Price</a>
+        <a href="/contact/" class="btn btn-primary">Request a Quote</a>
       </div>
       <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
     </nav>
@@ -5094,7 +5135,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/" onclick="closeMenu()">Price Guide</a>
     <a href="/contact/" onclick="closeMenu()">Contact</a>
     <a href="tel:+12085550100" onclick="closeMenu()" style="display:flex;align-items:center;gap:8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a>
-    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Get a Price</a>
+    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Request a Quote</a>
   </nav>
 </header>
 
@@ -5108,7 +5149,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       <p class="area-coords" aria-hidden="true">43.5407&deg; N &middot; -116.5635&deg; W</p>
       <p>Drain and sewer work downtown, water heaters out along Karcher Road.</p>
       <div class="hero-ctas">
-        <a href="/contact/" class="btn btn-primary">Get a Price</a>
+        <a href="/contact/" class="btn btn-primary">Request a Quote</a>
         <p><a href="tel:+12085550100" class="hero-phone"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a></p>
       </div>
       <p class="referral-line">We'll put you in touch with a local contractor.</p>
@@ -5125,8 +5166,8 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
           <p class="area-intro-body">Nampa is Idaho's third-largest city, and it splits into an old railroad-era grid around 12th Avenue and Northwest Nazarene University and a ring of newer subdivisions along Karcher Road and out toward Lake Lowell. The old core brings clay and cast iron sewer laterals with roots in the joints, while the newer tracts bring long service lines and garage water heaters on larger lots. Lakeview Park, the city's oldest, sits in the middle of it, and the service area covers both halves of town.</p>
         </div>
         <div class="area-cta-card">
-          <h3>Get an Estimate</h3>
-          <p>We serve Nampa and surrounding neighborhoods. Contact us today for a no-obligation quote.</p>
+          <h3>Need a Plumber?</h3>
+          <p>We serve Nampa and surrounding neighborhoods. Tell us what's going on and we'll book a visit.</p>
           <a href="tel:+12085550100" class="area-cta-phone">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             +1 (208) 555-0100
@@ -5146,7 +5187,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       <div class="area-services-grid services-grid--3col">
 <div class="area-service-card">
   <h3>Emergency Plumbing Repair in Nampa</h3>
-  <p>Burst pipes, sewer backups, leaking water heaters and no-water calls, answered around the clock across Boise and the Treasure Valley, with the price written down before the repair starts.</p>
+  <p>Burst pipes, sewer backups, leaking water heaters and no-water calls, with help by phone on which valve to close before the plumber gets there.</p>
   <a href="/services/emergency-plumbing-repair/">Learn more →</a>
 </div>
 <div class="area-service-card">
@@ -5156,17 +5197,17 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
 </div>
 <div class="area-service-card">
   <h3>Water Heater Repair and Replacement in Nampa</h3>
-  <p>Tank and tankless water heaters repaired or replaced, sized for the household, with hard-water scale dealt with so the new unit lasts in Boise's water.</p>
+  <p>Tank and tankless water heaters repaired or replaced and sized for the household, with hard-water scale checked while we are there.</p>
   <a href="/services/water-heater-repair-and-replacement/">Learn more →</a>
 </div>
 <div class="area-service-card">
   <h3>Leak Repair and Repiping in Nampa</h3>
-  <p>Pinhole leaks, slab and crawlspace leaks, and whole-home repiping of old galvanized or failing copper in PEX or copper, with the price in writing before a wall is opened.</p>
+  <p>Pinhole leaks, slab and crawlspace leaks, and whole-home repiping of old galvanized or failing copper in PEX or copper. The leak is found before a wall is opened.</p>
   <a href="/services/leak-repair-and-repiping/">Learn more →</a>
 </div>
 <div class="area-service-card">
   <h3>Water Softeners and Filtration in Nampa</h3>
-  <p>Whole-home softeners sized to Boise's 10 to 13 grain water, plus carbon and drinking-water filtration, installed with a bypass so the lawn and garden stay on untreated water.</p>
+  <p>Whole-home softeners sized from a hardness test at your tap, plus carbon and drinking-water filtration, installed with a bypass so the lawn and garden stay on untreated water.</p>
   <a href="/services/water-softeners-and-filtration/">Learn more →</a>
 </div>
       </div>
@@ -5202,16 +5243,16 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <span class="faq-icon" aria-hidden="true">+</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Nampa pricing tracks the rest of the Treasure Valley, with directory listings putting a standard service call between about $150 and $350 and bigger jobs such as sewer line work quoted per project. Older homes downtown can run higher when cast iron or clay lines need camera work first. You get the number in writing before anything is cut or dug.</div>
+            <div class="faq-answer-inner">Nampa pricing tracks the rest of the Treasure Valley, with directory listings typically putting a standard service call between about $150 and $350 and bigger jobs such as sewer line work quoted per project. Older homes downtown can run higher when cast iron or clay lines need camera work first. Ask for the number in writing before anything is cut or dug.</div>
           </div>
         </div>
         <div class="faq-item" role="listitem">
           <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
-            <span>Do you cover the Nampa side of the Karcher corridor and out toward Lake Lowell?</span>
+            <span>Do you cover the Karcher Road corridor as well as downtown Nampa?</span>
             <span class="faq-icon" aria-hidden="true">+</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Yes. The Karcher Road corridor, the subdivisions toward Lake Lowell, the downtown grid around 12th Avenue and the neighborhoods near Northwest Nazarene University are all covered. Nampa is inside the regular service radius, and any trip fee is written on the work order with the rest of the price before work starts.</div>
+            <div class="faq-answer-inner">Yes. The Karcher Road corridor, the downtown grid around 12th Avenue and the neighborhoods near Northwest Nazarene University are all covered. Nampa is inside the regular service area.</div>
           </div>
         </div>
         <div class="faq-item" role="listitem">
@@ -5244,7 +5285,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       <p class="area-location-blurb">Nampa started as a railroad town when the Oregon Short Line came through in the 1880s, and the old grid around the depot and 12th Avenue still shows it. It is Idaho's third-largest city now, spreading from the historic downtown and the Northwest Nazarene University campus out to newer subdivisions along Karcher Road and toward Lake Lowell on the southwest side.</p>
 <p class="area-location-blurb">That spread means two kinds of houses. Downtown and near the college, homes from the 1910s through the 1950s often have original cast iron and clay sewer laterals, with roots from mature trees finding every joint. Along Karcher Road and south toward the lake, homes from the 1990s onward have plastic drains and PEX supply, but many sit on larger lots with long service lines.</p>
 <p class="area-location-blurb">The city's water comes entirely from 17 wells in the western Snake River Plain Aquifer, and the 2023 report puts hardness from none to about 7 grains per gallon, softer than much of the valley. Homes on private wells outside city limits can differ, and winter still freezes exposed lines when a January cold snap settles in.</p>
-<p class="area-location-blurb">The older core tends to need sewer and drain work, and the newer tracts tend to need water heater swaps. The price for either is written down before the first tool comes off the truck.</p>
+<p class="area-location-blurb">The older core tends to need sewer and drain work, and the newer tracts tend to need water heater swaps. We handle both.</p>
     </div>
   </section>
 
@@ -5253,8 +5294,8 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
   <section class="quote-form-section" aria-labelledby="quote-form-heading">
     <div class="container">
       <div class="quote-form-card form-variant-inline-panel">
-        <h2 id="quote-form-heading">Get a Quote in Nampa</h2>
-        <p class="quote-form-sub">Tell us about your project and you&rsquo;ll hear back within one business day.</p>
+        <h2 id="quote-form-heading">Request a Quote in Nampa</h2>
+        <p class="quote-form-sub">Tell us what's leaking, clogged or broken, and where in the house.</p>
         <form class="quote-form" action="https://leads-proxy.jeongpark95.workers.dev" method="POST" name="quote-lead" data-leads-form>
           <input type="hidden" name="run_id" value="plumbing-boise-001">
           <div class="hp-field" aria-hidden="true"><input type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
@@ -5266,7 +5307,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
           </div>
           <div class="quote-form-row">
             <input type="email" name="email" placeholder="Email (optional)" autocomplete="email" aria-label="Email address">
-            <input type="text" name="message" placeholder="What do you need done?" aria-label="Project details">
+            <input type="text" name="message" placeholder="What is leaking, clogged or broken, and where?" aria-label="Project details">
           </div>
           <div class="cf-turnstile" data-sitekey="0x4AAAAAAGEhzYf9wGkV4IbN" data-size="flexible" data-theme="light"></div>
           <input type="hidden" name="cf-sitekey" value="0x4AAAAAAGEhzYf9wGkV4IbN">
@@ -5276,7 +5317,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
         <div class="form-thank-you" aria-live="polite">
           <div class="form-thank-you-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h3>We&rsquo;ve got your request!</h3>
-          <p>You&rsquo;ll hear back within one business day. Need to talk sooner? Call <a href="tel:+12085550100">+1 (208) 555-0100</a>.</p>
+          <p>Thanks, your message is in. For an emergency, call the line. Need to talk sooner? Call <a href="tel:+12085550100">+1 (208) 555-0100</a>.</p>
         </div>
       </div>
     </div>
@@ -5284,9 +5325,9 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
 
   <section id="cta-band" aria-labelledby="cta-heading" style="--cta-photo:url('/images/cta_bg.webp')">
     <div class="container">
-      <h2 id="cta-heading">Need a Plumber in Boise Today?</h2>
-      <p>Call or send the form. You get a time window, a plumber who looks at the problem, and the price in writing before any work starts. Emergency calls are answered around the clock.</p>
-      <a href="/contact/" class="cta-band-btn">Get a Written Price</a>
+      <h2 id="cta-heading">Need a Plumber in the Treasure Valley?</h2>
+      <p>Call or send the form. Tell us what's going on and we'll book a visit.</p>
+      <a href="/contact/" class="cta-band-btn">Request a Quote</a>
     </div>
   </section>
 
@@ -5334,14 +5375,14 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <li><a href="/services/leak-repair-and-repiping/">Leak Repair and Repiping</a></li>
             <li><a href="/services/water-softeners-and-filtration/">Water Softeners and Filtration</a></li>
 </ul></div>
-    <div class="footer-col"><h4>Inquiry</h4><ul><li><a href="/contact/">Request Quote</a></li><li><a href="/about/">About Us</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div>
+    <div class="footer-col"><h4>Inquiry</h4><ul><li><a href="/contact/">Request a Quote</a></li><li><a href="/about/">About Us</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div>
     <div class="footer-col"><h4>Serving the Treasure Valley</h4><ul><li><a href="/">Boise</a></li><li><a href="/areas/meridian/">Meridian</a></li><li><a href="/areas/nampa/">Nampa</a></li><li><a href="/areas/eagle/">Eagle</a></li><li><a href="/areas/caldwell/">Caldwell</a></li><li><a href="/areas/kuna/">Kuna</a></li></ul></div>
   </div></div></div>
   <div class="container"><p class="footer-disclaimer">This site is a free service to assist homeowners in connecting with local service contractors. All contractors are independent and this site does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. All persons depicted in a photo or video are actors or models and not contractors listed on this site.</p></div>
   <div class="container"><div class="footer-bottom"><span>© 2026 Boise Plumbing Co. All rights reserved.</span><span>Boise, Idaho, United States</span></div></div>
 </footer>
 
-<a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now — +1 (208) 555-0100</a>
+<a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now: +1 (208) 555-0100</a>
 
 <script>
   function toggleFaq(btn){var item=btn.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');el.querySelector('.faq-question').setAttribute('aria-expanded','false');});if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}}

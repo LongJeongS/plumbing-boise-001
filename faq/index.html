@@ -4841,6 +4841,47 @@ body.look-plain .cg-more-list li { border-bottom: 1px solid var(--border); }
 body.look-plain .cg-more-list a { display: block; padding: 14px 0; font-size: 17px; font-weight: 600; color: var(--color-primary); }
 body.look-plain .cg-more-list a:hover { text-decoration: underline; }
 /* review-round-nov-2026:end */
+/* legibility-nov-2026:start */
+/* Legibility fixes 2026-11-27, from what tools/legibility_check.py measured on the first plain sites. One marked chunk
+   so older tests can compare "today minus these fixes" (tests/legibility_round.py); every rule is scoped to the plain look.
+   Numbers band: where the brand accent is under 3:1 on the brand colour the assembler adds stats-figure-plain and the
+   figures are white (Naples coral on green measured 2.3:1). A readable accent keeps its colour. */
+body.look-plain.stats-brand-band.stats-figure-plain #stats-bar .stat-value { color: #fff; }
+/* Call-to-action band: the paragraph sits inside .cta-band-inner, so the rule above for "#cta-band > .container > p"
+   never reached it and it stayed at the classic 75% white (4.1 to 4.4:1 over the tinted photo). This is the intended 92%. */
+body.look-plain #cta-band .cta-band-sub { color: rgba(255,255,255,0.92); }
+/* Blog post top section: the breadcrumb and the date line are full white, and a dark scrim sits behind the text block
+   (it fades in over the block's top padding), so a pale photo cannot wash them out: 30% black keeps white text at 4.5:1 or better even where the photo is pure
+   white over these brand colours. The photo keeps its 45%. */
+body.look-plain .post-hero-overlay { background-image: linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(0,0,0,0.3) 40px, rgba(0,0,0,0.3) 100%); }
+body.look-plain .post-breadcrumb, body.look-plain .post-breadcrumb a, body.look-plain .post-meta { color: #fff; }
+/* Photo service cards (photo_overlay): the dark fade hangs from the card title, so however long the card's text is the
+   title and the text sit on it. It replaces the fade that was fixed at 20% to 72% of the card's height (a long text
+   pushed the title up into its light part: 2.7:1 on a pale photo). The icon tile stays above it. */
+body.look-plain #services.services-variant-photo-overlay .svc-photo::after { background: rgba(10,22,30,0.05); }
+body.look-plain #services.services-variant-photo-overlay .service-card h3::before { content: ""; position: absolute; z-index: -1; left: -22px; right: -22px; top: -110px; height: 1200px; pointer-events: none; background: linear-gradient(180deg, rgba(10,22,30,0) 0, rgba(10,22,30,0.5) 110px, rgba(10,22,30,0.88) 180px); }
+body.look-plain #services.services-variant-photo-overlay .service-icon { z-index: 2; }
+/* Heading faces that are hard to read small (config/font_traits.json: small-bodied like Cormorant Garamond, whose 17px
+   reads like 12.8px, or condensed like Bebas Neue): the assembler adds heading-face-small and the headings of 18px and
+   under, the contents and sidebar titles, the footer brand name and the logo kicker are set in the body font, bold.
+   Larger headings keep the heading face. */
+body.look-plain.heading-face-small #services:not(.services-variant-photo-overlay) .service-card h3, body.look-plain.heading-face-small .area-service-card h3, body.look-plain.heading-face-small .vp-text h3, body.look-plain.heading-face-small .vp-text h4, body.look-plain.heading-face-small .vp-card h3, body.look-plain.heading-face-small .process-step h3, body.look-plain.heading-face-small .application-item h3, body.look-plain.heading-face-small .related-card h3, body.look-plain.heading-face-small .cg-faq-item h3, body.look-plain.heading-face-small .blog-card-title, body.look-plain.heading-face-small .contact-info-header h2, body.look-plain.heading-face-small .sidebar-card h3, body.look-plain.heading-face-small .cg-toc-title, body.look-plain.heading-face-small #site-footer .footer-brand-link, body.look-plain.heading-face-small #site-nav .nav-logo .nav-logo-kicker { font-family: var(--font-body); font-weight: 700; }
+/* Footer disclaimer: 14px on both footers (it was 13.5px, and 13px on the light footer: one paragraph on every page,
+   which alone put 7 to 9% of a referral site's characters under 14px). */
+body.look-plain .footer-disclaimer, body.look-plain #site-footer.footer-variant-light-minimal .footer-disclaimer { font-size: 14px; }
+/* Blog pages toggle `is-open` (templates/blog-*.html); open the menu and the dropdown on it too. */
+body.look-plain .nav-mobile-menu.is-open { display: flex; }
+body.look-plain .nav-dropdown.is-open .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); visibility: visible; }
+/* legibility-nov-2026:end */
+/* template-round-nov-2026:start */
+/* ── Template round 2026-11-27 (tests/test_plain_template_round.py; the start and end markers let older tests set this
+   chunk aside: tests/template_round.py) ── */
+/* The open phone menu sits inside the fixed top bar, so a menu taller than the screen was cut off with no way to reach
+   its last links and button (Naples, Bakersfield on a 390x667 phone). It now scrolls inside what is left of the screen
+   under the bar (and the strip, where a site shows one), on every top bar and on the blog pages, whose script opens it
+   with `is-open`. The dynamic viewport height keeps the last button above a phone browser's toolbar. */
+body.look-plain #site-nav .nav-mobile-menu.open, body.look-plain #site-nav .nav-mobile-menu.is-open { max-height: calc(100vh - var(--plain-bar-h) - var(--plain-strip-h)); max-height: calc(100dvh - var(--plain-bar-h) - var(--plain-strip-h)); overflow-y: auto; overscroll-behavior: contain; }
+/* template-round-nov-2026:end */
 /* === hero-photo-form === */
 /* Top section: photo_form (the full-width photo with the plain look's left-heavy darkening; headline, text and phone on the left, a white
    quote-form card on the right over the photo; on phones the text comes first, then the card).
@@ -4996,7 +5037,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       </ul>
       <div class="nav-actions">
         <a href="tel:+12085550100" class="nav-phone" aria-label="Call us"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a>
-        <a href="/contact/" class="btn btn-primary">Get a Price</a>
+        <a href="/contact/" class="btn btn-primary">Request a Quote</a>
       </div>
       <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
     </nav>
@@ -5013,7 +5054,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/" onclick="closeMenu()">Price Guide</a>
     <a href="/contact/" onclick="closeMenu()">Contact</a>
     <a href="tel:+12085550100" onclick="closeMenu()" style="display:flex;align-items:center;gap:8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+1 (208) 555-0100</a>
-    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Get a Price</a>
+    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Request a Quote</a>
   </nav>
 </header>
 
@@ -5050,19 +5091,19 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <div class="faq-accordion">
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">How much does a plumber charge per hour in Boise?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Local 2026 price guides put Boise plumbers at about $75 to $150 an hour during business hours, and directory listings put a typical service call at about $225, with a range from roughly $150 to $350. Rates move with the time of day, the scope and the parts. Here the price for the job is written on the work order before work starts, and any change to it is discussed with you before extra work is done.</div>
+                <div class="faq-answer">Local 2026 price guides typically put Boise plumbers at about $75 to $150 an hour during business hours, and directory listings put a typical service call at about $225, with a range from roughly $150 to $350. Rates move with the time of day, the scope and the parts, so ask for a written quote for your own job.</div>
               </details>
               <details class="faq-item" open>
-                <summary class="faq-question" tabindex="-1">Is the quote fixed, or can the price go up once the work starts in Boise?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">The written price does not change without a call to you first. If the plumber opens a wall and finds something different from the diagnosis, the work stops, you hear what was found and what it costs, and you decide. Nothing lands on the invoice that you did not approve.</div>
+                <summary class="faq-question" tabindex="-1">Can the price go up once the work has started?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
+                <div class="faq-answer">You see the price in writing before the work starts. It can still change if the job does, for example when a wall is opened and the pipe behind it is not what the diagnosis showed. When that happens the work stops, you hear what was found and what it would cost, and you decide whether to go ahead.</div>
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Does an emergency call at night in Boise cost more than a daytime visit?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Usually, yes, across the Boise market, since after-hours work carries a higher trip charge than a scheduled daytime window. The honest part is telling you which one you need. If the water is shut off and nothing is actively leaking, the person on the phone will say so, and a morning visit at daytime rates is an option. Either way, the number is written down before the work begins.</div>
+                <div class="faq-answer">Usually, yes. After-hours work across the Boise market costs more than a scheduled daytime visit. If the water is shut off and nothing is actively leaking, the person on the phone will say so, and a morning visit at daytime rates is an option.</div>
               </details>
               <details class="faq-item" open>
-                <summary class="faq-question" tabindex="-1">What does the written price on the work order include?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">The parts named, the labor and the cleanup for the job described, plus the permit fee when the city requires one. Anything outside that scope is quoted separately and only done if you say yes. Ask for the work order before the plumber starts and compare it to the invoice when the job is done; they should match.</div>
+                <summary class="faq-question" tabindex="-1">What should a written plumbing price include?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
+                <div class="faq-answer">A written price should name the parts, the labor and the cleanup for the job described, plus the permit fee when the city requires one. Anything outside that scope should be quoted separately and done only if you say yes. Ask for the work order before the plumber starts and compare it with the invoice when the job is done.</div>
               </details>
             </div>
           </div>
@@ -5072,7 +5113,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <div class="faq-accordion">
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Do you offer 24/7 emergency plumbing in Boise and the Treasure Valley?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Yes, the emergency line is answered around the clock, every day, for Boise, Meridian, Eagle, Nampa, Caldwell and Kuna. Regular hours are Monday to Friday 7am to 6pm and Saturday 8am to 2pm. A burst pipe, a sewer backup or no water at all is an emergency; a slow drain can usually wait for a daytime window at a lower cost.</div>
+                <div class="faq-answer">Yes, the emergency line is answered around the clock, every day, for Boise, Meridian, Eagle, Nampa, Caldwell and Kuna. Regular hours are Monday to Friday 7am to 6pm and Saturday 8am to 2pm. A burst pipe, a sewer backup or no water at all is an emergency; a slow drain can usually wait for a daytime visit at a lower cost.</div>
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">What counts as emergency plumbing?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
@@ -5093,12 +5134,12 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <h2>Water Heaters & Hard Water</h2>
             <div class="faq-accordion">
               <details class="faq-item" open>
-                <summary class="faq-question" tabindex="-1">Should I repair my water heater or just replace it in Boise?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Repair it if the tank is under about ten years old and the fault is a part: a thermostat, an element, a gas valve or a relief valve. Replace it if the tank itself is leaking, if it is past ten to twelve years, or if hard-water scale has it rumbling and losing capacity. Boise's hard water shortens tank life, so age matters more here than the national rule of thumb suggests. You get both options priced in writing.</div>
+                <summary class="faq-question" tabindex="-1">Should I repair my water heater or replace it?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
+                <div class="faq-answer">Repair it if the tank is under about ten years old and the fault is a part: a thermostat, an element, a gas valve or a relief valve. Replace it if the tank itself is leaking, if it is past ten to twelve years, or if hard-water scale has it rumbling and losing capacity. Boise's hard water shortens tank life, so age matters more here than the national rule of thumb suggests. Ask for a price on both.</div>
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Is a tankless water heater worth it in Boise compared to a regular tank?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">It depends on how much hot water you use at once and how long you plan to stay in the house. Market figures seen locally put a tank replacement around $800 to $2,500 installed and a tankless unit at roughly $2,000 to $6,000, so the gap is real. Tankless units also need regular descaling in Boise's hard water or the heat exchanger clogs. Ask for both numbers in writing and decide on the math for your household.</div>
+                <div class="faq-answer">It depends on how much hot water you use at once and how long you plan to stay in the house. Market figures seen locally typically put a tank replacement around $800 to $2,500 installed and a tankless unit at roughly $2,000 to $6,000, so the gap is real. Tankless units also need regular descaling in Boise's hard water or the heat exchanger clogs. Ask for both numbers in writing and decide on the math for your household.</div>
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Why is the water so hard in the Treasure Valley, and do I need a water softener?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
@@ -5106,7 +5147,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Can a water softener be added to an existing home?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Yes. Most softeners go in where the main line enters the house, near the water heater or in the garage, with a drain line for the regeneration cycle and a bypass so outdoor spigots stay on hard water for the lawn. The install usually takes part of a day. If there is no drain nearby, the plumber will tell you what it takes to add one before the price is written.</div>
+                <div class="faq-answer">Yes. Most softeners go in where the main line enters the house, near the water heater or in the garage, with a drain line for the regeneration cycle and a bypass so outdoor spigots stay on hard water for the lawn. If there is no drain nearby, the plumber will tell you what it takes to add one.</div>
               </details>
             </div>
           </div>
@@ -5116,15 +5157,15 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <div class="faq-accordion">
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Do I need a permit to replace a water heater or repipe my house in Boise?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Yes to both. The City of Boise lists 'install or replace a water heater' and 'repair, replace, relocate or add to the piping system' among permit-required plumbing jobs, and the state's licensing division says a permit is needed whenever plumbing work is done in Idaho. The permit is pulled as part of the job and the fee is shown on the work order. Ask any plumber who tells you a water heater swap needs no permit to point to the rule.</div>
+                <div class="faq-answer">Yes to both. The City of Boise lists 'install or replace a water heater' and 'repair, replace, relocate or add to the piping system' among permit-required plumbing jobs, and the state's licensing division says a permit is needed whenever plumbing work is done in Idaho. The permit is pulled as part of the job and the fee is shown on the work order.</div>
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Which Treasure Valley towns do you serve from Boise?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">Boise, Meridian, Eagle, Nampa, Caldwell and Kuna, which works out to roughly a 25-mile radius from downtown Boise. The written-price process is the same in every town, and the emergency line covers all six. If you are just outside that circle, call anyway and ask.</div>
+                <div class="faq-answer">Boise, Meridian, Eagle, Nampa, Caldwell and Kuna, which works out to roughly a 25-mile radius from downtown Boise. If you are just outside that circle, call anyway and ask.</div>
               </details>
               <details class="faq-item" open>
                 <summary class="faq-question" tabindex="-1">Who handles the permit if my home is in Meridian or Nampa rather than Boise?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-                <div class="faq-answer">The plumber does, from whichever office covers your address. In Idaho, plumbing permits run through the state's licensing division or a city building department depending on the town, and the state says a permit is needed whenever plumbing work is performed. The fee is listed on the work order and the inspection is scheduled as part of the job, so you are not left chasing paperwork.</div>
+                <div class="faq-answer">The plumber does, from whichever office covers your address. In Idaho, plumbing permits run through the state's licensing division or a city building department depending on the town, and the state says a permit is needed whenever plumbing work is performed. The inspection is scheduled as part of the job.</div>
               </details>
             </div>
           </div>
@@ -5137,9 +5178,9 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
   <!-- ── CTA Band ───────────────────────────────────────────────────────── -->
   <section id="cta-band" aria-labelledby="cta-heading" style="--cta-photo:url('/images/cta_bg.webp')">
     <div class="container">
-      <h2 id="cta-heading">Need a Plumber in Boise Today?</h2>
-      <p>Call or send the form. You get a time window, a plumber who looks at the problem, and the price in writing before any work starts. Emergency calls are answered around the clock.</p>
-      <a href="/contact/" class="cta-band-btn">Get a Written Price</a>
+      <h2 id="cta-heading">Need a Plumber in the Treasure Valley?</h2>
+      <p>Call or send the form. Tell us what's going on and we'll book a visit.</p>
+      <a href="/contact/" class="cta-band-btn">Request a Quote</a>
     </div>
   </section>
 
@@ -5155,15 +5196,15 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "How much does a plumber charge per hour in Boise?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Local 2026 price guides put Boise plumbers at about $75 to $150 an hour during business hours, and directory listings put a typical service call at about $225, with a range from roughly $150 to $350. Rates move with the time of day, the scope and the parts. Here the price for the job is written on the work order before work starts, and any change to it is discussed with you before extra work is done."
+        "text": "Local 2026 price guides typically put Boise plumbers at about $75 to $150 an hour during business hours, and directory listings put a typical service call at about $225, with a range from roughly $150 to $350. Rates move with the time of day, the scope and the parts, so ask for a written quote for your own job."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the quote fixed, or can the price go up once the work starts in Boise?",
+      "name": "Can the price go up once the work has started?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The written price does not change without a call to you first. If the plumber opens a wall and finds something different from the diagnosis, the work stops, you hear what was found and what it costs, and you decide. Nothing lands on the invoice that you did not approve."
+        "text": "You see the price in writing before the work starts. It can still change if the job does, for example when a wall is opened and the pipe behind it is not what the diagnosis showed. When that happens the work stops, you hear what was found and what it would cost, and you decide whether to go ahead."
       }
     },
     {
@@ -5171,15 +5212,15 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Does an emergency call at night in Boise cost more than a daytime visit?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Usually, yes, across the Boise market, since after-hours work carries a higher trip charge than a scheduled daytime window. The honest part is telling you which one you need. If the water is shut off and nothing is actively leaking, the person on the phone will say so, and a morning visit at daytime rates is an option. Either way, the number is written down before the work begins."
+        "text": "Usually, yes. After-hours work across the Boise market costs more than a scheduled daytime visit. If the water is shut off and nothing is actively leaking, the person on the phone will say so, and a morning visit at daytime rates is an option."
       }
     },
     {
       "@type": "Question",
-      "name": "What does the written price on the work order include?",
+      "name": "What should a written plumbing price include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The parts named, the labor and the cleanup for the job described, plus the permit fee when the city requires one. Anything outside that scope is quoted separately and only done if you say yes. Ask for the work order before the plumber starts and compare it to the invoice when the job is done; they should match."
+        "text": "A written price should name the parts, the labor and the cleanup for the job described, plus the permit fee when the city requires one. Anything outside that scope should be quoted separately and done only if you say yes. Ask for the work order before the plumber starts and compare it with the invoice when the job is done."
       }
     },
     {
@@ -5187,7 +5228,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Do you offer 24/7 emergency plumbing in Boise and the Treasure Valley?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, the emergency line is answered around the clock, every day, for Boise, Meridian, Eagle, Nampa, Caldwell and Kuna. Regular hours are Monday to Friday 7am to 6pm and Saturday 8am to 2pm. A burst pipe, a sewer backup or no water at all is an emergency; a slow drain can usually wait for a daytime window at a lower cost."
+        "text": "Yes, the emergency line is answered around the clock, every day, for Boise, Meridian, Eagle, Nampa, Caldwell and Kuna. Regular hours are Monday to Friday 7am to 6pm and Saturday 8am to 2pm. A burst pipe, a sewer backup or no water at all is an emergency; a slow drain can usually wait for a daytime visit at a lower cost."
       }
     },
     {
@@ -5216,10 +5257,10 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     },
     {
       "@type": "Question",
-      "name": "Should I repair my water heater or just replace it in Boise?",
+      "name": "Should I repair my water heater or replace it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Repair it if the tank is under about ten years old and the fault is a part: a thermostat, an element, a gas valve or a relief valve. Replace it if the tank itself is leaking, if it is past ten to twelve years, or if hard-water scale has it rumbling and losing capacity. Boise's hard water shortens tank life, so age matters more here than the national rule of thumb suggests. You get both options priced in writing."
+        "text": "Repair it if the tank is under about ten years old and the fault is a part: a thermostat, an element, a gas valve or a relief valve. Replace it if the tank itself is leaking, if it is past ten to twelve years, or if hard-water scale has it rumbling and losing capacity. Boise's hard water shortens tank life, so age matters more here than the national rule of thumb suggests. Ask for a price on both."
       }
     },
     {
@@ -5227,7 +5268,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Is a tankless water heater worth it in Boise compared to a regular tank?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It depends on how much hot water you use at once and how long you plan to stay in the house. Market figures seen locally put a tank replacement around $800 to $2,500 installed and a tankless unit at roughly $2,000 to $6,000, so the gap is real. Tankless units also need regular descaling in Boise's hard water or the heat exchanger clogs. Ask for both numbers in writing and decide on the math for your household."
+        "text": "It depends on how much hot water you use at once and how long you plan to stay in the house. Market figures seen locally typically put a tank replacement around $800 to $2,500 installed and a tankless unit at roughly $2,000 to $6,000, so the gap is real. Tankless units also need regular descaling in Boise's hard water or the heat exchanger clogs. Ask for both numbers in writing and decide on the math for your household."
       }
     },
     {
@@ -5243,7 +5284,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Can a water softener be added to an existing home?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Most softeners go in where the main line enters the house, near the water heater or in the garage, with a drain line for the regeneration cycle and a bypass so outdoor spigots stay on hard water for the lawn. The install usually takes part of a day. If there is no drain nearby, the plumber will tell you what it takes to add one before the price is written."
+        "text": "Yes. Most softeners go in where the main line enters the house, near the water heater or in the garage, with a drain line for the regeneration cycle and a bypass so outdoor spigots stay on hard water for the lawn. If there is no drain nearby, the plumber will tell you what it takes to add one."
       }
     },
     {
@@ -5251,7 +5292,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Do I need a permit to replace a water heater or repipe my house in Boise?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes to both. The City of Boise lists 'install or replace a water heater' and 'repair, replace, relocate or add to the piping system' among permit-required plumbing jobs, and the state's licensing division says a permit is needed whenever plumbing work is done in Idaho. The permit is pulled as part of the job and the fee is shown on the work order. Ask any plumber who tells you a water heater swap needs no permit to point to the rule."
+        "text": "Yes to both. The City of Boise lists 'install or replace a water heater' and 'repair, replace, relocate or add to the piping system' among permit-required plumbing jobs, and the state's licensing division says a permit is needed whenever plumbing work is done in Idaho. The permit is pulled as part of the job and the fee is shown on the work order."
       }
     },
     {
@@ -5259,7 +5300,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Which Treasure Valley towns do you serve from Boise?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Boise, Meridian, Eagle, Nampa, Caldwell and Kuna, which works out to roughly a 25-mile radius from downtown Boise. The written-price process is the same in every town, and the emergency line covers all six. If you are just outside that circle, call anyway and ask."
+        "text": "Boise, Meridian, Eagle, Nampa, Caldwell and Kuna, which works out to roughly a 25-mile radius from downtown Boise. If you are just outside that circle, call anyway and ask."
       }
     },
     {
@@ -5267,7 +5308,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       "name": "Who handles the permit if my home is in Meridian or Nampa rather than Boise?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The plumber does, from whichever office covers your address. In Idaho, plumbing permits run through the state's licensing division or a city building department depending on the town, and the state says a permit is needed whenever plumbing work is performed. The fee is listed on the work order and the inspection is scheduled as part of the job, so you are not left chasing paperwork."
+        "text": "The plumber does, from whichever office covers your address. In Idaho, plumbing permits run through the state's licensing division or a city building department depending on the town, and the state says a permit is needed whenever plumbing work is performed. The inspection is scheduled as part of the job."
       }
     }
   ]
@@ -5284,14 +5325,14 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
             <li><a href="/services/leak-repair-and-repiping/">Leak Repair and Repiping</a></li>
             <li><a href="/services/water-softeners-and-filtration/">Water Softeners and Filtration</a></li>
 </ul></div>
-    <div class="footer-col"><h4>Inquiry</h4><ul><li><a href="/contact/">Request Quote</a></li><li><a href="/about/">About Us</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div>
+    <div class="footer-col"><h4>Inquiry</h4><ul><li><a href="/contact/">Request a Quote</a></li><li><a href="/about/">About Us</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div>
     <div class="footer-col"><h4>Serving the Treasure Valley</h4><ul><li><a href="/">Boise</a></li><li><a href="/areas/meridian/">Meridian</a></li><li><a href="/areas/nampa/">Nampa</a></li><li><a href="/areas/eagle/">Eagle</a></li><li><a href="/areas/caldwell/">Caldwell</a></li><li><a href="/areas/kuna/">Kuna</a></li></ul></div>
   </div></div></div>
   <div class="container"><p class="footer-disclaimer">This site is a free service to assist homeowners in connecting with local service contractors. All contractors are independent and this site does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. All persons depicted in a photo or video are actors or models and not contractors listed on this site.</p></div>
   <div class="container"><div class="footer-bottom"><span>© 2026 Boise Plumbing Co. All rights reserved.</span><span>Boise, Idaho, United States</span></div></div>
 </footer>
 
-<a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now — +1 (208) 555-0100</a>
+<a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now: +1 (208) 555-0100</a>
 
 <script>
   function toggleMenu(btn){var m=document.getElementById('mobile-nav');m.classList.toggle('open');btn.setAttribute('aria-expanded',String(m.classList.contains('open')));}
