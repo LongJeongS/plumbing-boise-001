@@ -8,10 +8,10 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=365aa68d">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Boise Plumbing Co.</title>
-  <meta name="description" content="Boise Plumbing Co. is a residential service plumber for Boise and the Treasure Valley, from Eagle and Meridian out to Nampa, Caldwell and Kuna.">
+  <meta name="description" content="Boise Plumbing Co. is a residential plumber for Boise and the Treasure Valley, from Eagle and Meridian out to Nampa, Caldwell and Kuna.">
   <link rel="canonical" href="https://plumbing-boise-001.pages.dev/about/">
   <meta property="og:title" content="About Us | Boise Plumbing Co.">
-  <meta property="og:description" content="Boise Plumbing Co. is a residential service plumber for Boise and the Treasure Valley, from Eagle and Meridian out to Nampa, Caldwell and Kuna.">
+  <meta property="og:description" content="Boise Plumbing Co. is a residential plumber for Boise and the Treasure Valley, from Eagle and Meridian out to Nampa, Caldwell and Kuna.">
   <meta property="og:url" content="https://plumbing-boise-001.pages.dev/about/">
   <meta property="og:type" content="website">
   <style>
@@ -4840,6 +4840,47 @@ body.look-plain .cg-more-list li { border-bottom: 1px solid var(--border); }
 body.look-plain .cg-more-list a { display: block; padding: 14px 0; font-size: 17px; font-weight: 600; color: var(--color-primary); }
 body.look-plain .cg-more-list a:hover { text-decoration: underline; }
 /* review-round-nov-2026:end */
+/* legibility-nov-2026:start */
+/* Legibility fixes 2026-11-27, from what tools/legibility_check.py measured on the first plain sites. One marked chunk
+   so older tests can compare "today minus these fixes" (tests/legibility_round.py); every rule is scoped to the plain look.
+   Numbers band: where the brand accent is under 3:1 on the brand colour the assembler adds stats-figure-plain and the
+   figures are white (Naples coral on green measured 2.3:1). A readable accent keeps its colour. */
+body.look-plain.stats-brand-band.stats-figure-plain #stats-bar .stat-value { color: #fff; }
+/* Call-to-action band: the paragraph sits inside .cta-band-inner, so the rule above for "#cta-band > .container > p"
+   never reached it and it stayed at the classic 75% white (4.1 to 4.4:1 over the tinted photo). This is the intended 92%. */
+body.look-plain #cta-band .cta-band-sub { color: rgba(255,255,255,0.92); }
+/* Blog post top section: the breadcrumb and the date line are full white, and a dark scrim sits behind the text block
+   (it fades in over the block's top padding), so a pale photo cannot wash them out: 30% black keeps white text at 4.5:1 or better even where the photo is pure
+   white over these brand colours. The photo keeps its 45%. */
+body.look-plain .post-hero-overlay { background-image: linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(0,0,0,0.3) 40px, rgba(0,0,0,0.3) 100%); }
+body.look-plain .post-breadcrumb, body.look-plain .post-breadcrumb a, body.look-plain .post-meta { color: #fff; }
+/* Photo service cards (photo_overlay): the dark fade hangs from the card title, so however long the card's text is the
+   title and the text sit on it. It replaces the fade that was fixed at 20% to 72% of the card's height (a long text
+   pushed the title up into its light part: 2.7:1 on a pale photo). The icon tile stays above it. */
+body.look-plain #services.services-variant-photo-overlay .svc-photo::after { background: rgba(10,22,30,0.05); }
+body.look-plain #services.services-variant-photo-overlay .service-card h3::before { content: ""; position: absolute; z-index: -1; left: -22px; right: -22px; top: -110px; height: 1200px; pointer-events: none; background: linear-gradient(180deg, rgba(10,22,30,0) 0, rgba(10,22,30,0.5) 110px, rgba(10,22,30,0.88) 180px); }
+body.look-plain #services.services-variant-photo-overlay .service-icon { z-index: 2; }
+/* Heading faces that are hard to read small (config/font_traits.json: small-bodied like Cormorant Garamond, whose 17px
+   reads like 12.8px, or condensed like Bebas Neue): the assembler adds heading-face-small and the headings of 18px and
+   under, the contents and sidebar titles, the footer brand name and the logo kicker are set in the body font, bold.
+   Larger headings keep the heading face. */
+body.look-plain.heading-face-small #services:not(.services-variant-photo-overlay) .service-card h3, body.look-plain.heading-face-small .area-service-card h3, body.look-plain.heading-face-small .vp-text h3, body.look-plain.heading-face-small .vp-text h4, body.look-plain.heading-face-small .vp-card h3, body.look-plain.heading-face-small .process-step h3, body.look-plain.heading-face-small .application-item h3, body.look-plain.heading-face-small .related-card h3, body.look-plain.heading-face-small .cg-faq-item h3, body.look-plain.heading-face-small .blog-card-title, body.look-plain.heading-face-small .contact-info-header h2, body.look-plain.heading-face-small .sidebar-card h3, body.look-plain.heading-face-small .cg-toc-title, body.look-plain.heading-face-small #site-footer .footer-brand-link, body.look-plain.heading-face-small #site-nav .nav-logo .nav-logo-kicker { font-family: var(--font-body); font-weight: 700; }
+/* Footer disclaimer: 14px on both footers (it was 13.5px, and 13px on the light footer: one paragraph on every page,
+   which alone put 7 to 9% of a referral site's characters under 14px). */
+body.look-plain .footer-disclaimer, body.look-plain #site-footer.footer-variant-light-minimal .footer-disclaimer { font-size: 14px; }
+/* Blog pages toggle `is-open` (templates/blog-*.html); open the menu and the dropdown on it too. */
+body.look-plain .nav-mobile-menu.is-open { display: flex; }
+body.look-plain .nav-dropdown.is-open .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); visibility: visible; }
+/* legibility-nov-2026:end */
+/* template-round-nov-2026:start */
+/* ── Template round 2026-11-27 (tests/test_plain_template_round.py; the start and end markers let older tests set this
+   chunk aside: tests/template_round.py) ── */
+/* The open phone menu sits inside the fixed top bar, so a menu taller than the screen was cut off with no way to reach
+   its last links and button (Naples, Bakersfield on a 390x667 phone). It now scrolls inside what is left of the screen
+   under the bar (and the strip, where a site shows one), on every top bar and on the blog pages, whose script opens it
+   with `is-open`. The dynamic viewport height keeps the last button above a phone browser's toolbar. */
+body.look-plain #site-nav .nav-mobile-menu.open, body.look-plain #site-nav .nav-mobile-menu.is-open { max-height: calc(100vh - var(--plain-bar-h) - var(--plain-strip-h)); max-height: calc(100dvh - var(--plain-bar-h) - var(--plain-strip-h)); overflow-y: auto; overscroll-behavior: contain; }
+/* template-round-nov-2026:end */
 /* === hero-photo-form === */
 /* Top section: photo_form (the full-width photo with the plain look's left-heavy darkening; headline, text and phone on the left, a white
    quote-form card on the right over the photo; on phones the text comes first, then the card).
@@ -5042,7 +5083,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           +1 (208) 555-0100
         </a>
-        <a href="/contact/" class="btn btn-primary">Get a Price</a>
+        <a href="/contact/" class="btn btn-primary">Request a Quote</a>
       </div>
       <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
         <span></span><span></span><span></span>
@@ -5064,7 +5105,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       +1 (208) 555-0100
     </a>
-    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Get a Price</a>
+    <a href="/contact/" class="btn btn-primary mobile-cta" onclick="closeMenu()">Request a Quote</a>
   </nav>
 </header>
 
@@ -5076,7 +5117,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <div class="container">
       <span class="section-eyebrow">Our Story</span>
       <h1 id="about-heading">About Boise Plumbing Co.</h1>
-      <p>Fix Boise plumbing properly, with the price written down before the work begins and nothing added without a call.</p>
+      <p>We fix plumbing in Boise homes and explain the work first, so that you know what is being done.</p>
     </div>
   </section>
 
@@ -5087,10 +5128,10 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
         <div class="story-content reveal">
           <span class="section-eyebrow">Who We Are</span>
           <h2 class="section-title" id="story-heading">Our Story</h2>
-          <p class="story-intro">Boise Plumbing Co. is a residential service plumber for Boise and the Treasure Valley, from Eagle and Meridian out to Nampa, Caldwell and Kuna. The work is the calls that cannot wait, burst pipes, sewer backups and failed water heaters, and the ones that can, repiping older homes and treating the hard water that scales fixtures across the valley.</p>
+          <p class="story-intro">Boise Plumbing Co. is a residential plumber for Boise and the Treasure Valley, from Eagle and Meridian out to Nampa, Caldwell and Kuna. We take the calls that cannot wait, like burst pipes, sewer backups and failed water heaters, and the ones that can, like repiping an older home or treating the hard water that scales fixtures across the valley.</p>
         </div>
         <div class="story-image reveal">
-          <img src="/images/why_us.webp" alt="A plumber carrying a coil of pipe at the back of a work van" loading="lazy" width="600" height="450">
+          <img src="/images/why_us.webp" alt="A plumber lifting a coil of pipe from the back of an open work van" loading="lazy" width="600" height="450">
         </div>
       </div>
     </div>
@@ -5101,12 +5142,12 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <div class="container">
       <div class="stats-band-grid reveal-group">
         <div class="stats-band-item">
-          <div class="stats-band-value">6 Communities</div>
-          <div class="stats-band-label">Served</div>
+          <div class="stats-band-value">6</div>
+          <div class="stats-band-label">Towns We Work In</div>
         </div>
         <div class="stats-band-item">
-          <div class="stats-band-value">25 miles</div>
-          <div class="stats-band-label">Service Radius</div>
+          <div class="stats-band-value">5</div>
+          <div class="stats-band-label">Kinds of Plumbing Work</div>
         </div>
       </div>
     </div>
@@ -5116,15 +5157,15 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
   <section class="credentials-section section-pad" aria-labelledby="credentials-heading">
     <div class="container">
       <span class="section-eyebrow reveal">How We Work</span>
-      <h2 class="section-title reveal" id="credentials-heading">Why You Can Trust Us</h2>
+      <h2 class="section-title reveal" id="credentials-heading">What You Can Expect</h2>
       <div class="credentials-grid reveal-group">
         <div class="credential-item">
           <div class="credential-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="credential-label">Price written on the work order before any work starts</div>
+          <div class="credential-label">The fix explained before the repair starts</div>
         </div>
         <div class="credential-item">
           <div class="credential-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="credential-label">Any price change discussed with you before extra work</div>
+          <div class="credential-label">Extra work only after you have approved it</div>
         </div>
         <div class="credential-item">
           <div class="credential-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -5142,7 +5183,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
   <section class="why-us-section section-pad" aria-labelledby="why-heading">
     <div class="container">
       <span class="section-eyebrow reveal">Why Boise Plumbing Co.</span>
-      <h2 class="section-title reveal" id="why-heading">The Price Is on Paper First</h2>
+      <h2 class="section-title reveal" id="why-heading">What to Expect From Us</h2>
       <div class="value-props-grid reveal-group">
         <div class="vp-card">
           <div class="vp-icon" aria-hidden="true">
@@ -5155,15 +5196,15 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
           <div class="vp-icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Nothing You Did Not Ask For</h3>
-          <p>You get one point of contact from diagnosis to the fix, and the invoice matches the work order. Suggestions come as options with prices, never added quietly.</p>
+          <h3>A Line That Gets Answered</h3>
+          <p>The emergency line is answered around the clock. Tell us what you see and we'll tell you what to shut off and whether it can wait until morning.</p>
         </div>
         <div class="vp-card">
           <div class="vp-icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <h3>Hard Water Handled</h3>
-          <p>Boise water is reported at 10 to 13 grains per gallon of hardness, and that scale shortens water heater life. Softening and flushing are part of every visit's conversation.</p>
+          <p>Boise water is reported at 10 to 13 grains per gallon of hardness, and that scale shortens water heater life. We bring up flushing and softening whenever it would help.</p>
         </div>
       </div>
     </div>
@@ -5176,11 +5217,11 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
     <div class="container">
       <div class="cta-band-inner">
         <div>
-          <h2 class="cta-band-headline">Need a Plumber in Boise Today?</h2>
-          <p class="cta-band-sub">Call or send the form. You get a time window, a plumber who looks at the problem, and the price in writing before any work starts. Emergency calls are answered around the clock.</p>
+          <h2 class="cta-band-headline">Need a Plumber in the Treasure Valley?</h2>
+          <p class="cta-band-sub">Call or send the form. Tell us what's going on and we'll book a visit.</p>
         </div>
         <div class="cta-band-actions">
-          <a href="/contact/" class="btn btn-primary">Get a Written Price</a>
+          <a href="/contact/" class="btn btn-primary">Request a Quote</a>
           <a href="tel:+12085550100" class="cta-band-phone">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             +1 (208) 555-0100
@@ -5219,7 +5260,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
         <div class="footer-col">
           <h4>Inquiry</h4>
           <ul>
-            <li><a href="/contact/">Request Quote</a></li>
+            <li><a href="/contact/">Request a Quote</a></li>
             <li><a href="/about/">About Us</a></li>
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="/blog/">Blog</a></li><li><a href="/cost-guides/how-much-does-a-plumber-cost-in-boise-idaho/">Price Guide</a></li>
@@ -5253,7 +5294,7 @@ body.look-plain.has-emergency-strip #site-nav .nav-mobile-menu.open { max-height
 
 <a id="mobile-cta" href="tel:+12085550100" aria-label="Call us now">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.15 12 19.79 19.79 0 011.1 3.18 2 2 0 013.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-  Call Now — +1 (208) 555-0100
+  Call Now: +1 (208) 555-0100
 </a>
 
 <script>
